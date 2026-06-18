@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy Policy — ReviewAi Connect</title>
+<meta name="description" content="Privacy Policy for the ReviewAi Connect app: what data we collect, how we use it, and your rights." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#19233a;
+    --navy:#1a2a6c;
+    --tg:#1d97d4;
+    --green:#2fa14e;
+    --bg:#f7f9fc;
+    --card:#ffffff;
+    --muted:#5c6678;
+    --line:#e8edf4;
+    --fill:#fff3cd;
+    --fill-line:#ecd98a;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,sans-serif;
+    line-height:1.7;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 20px 80px;}
+
+  /* Header */
+  header{
+    background:linear-gradient(135deg,#162257 0%,#1a2a6c 45%,#1d97d4 130%);
+    color:#fff;
+    padding:54px 0 46px;
+    margin-bottom:-28px;
+    position:relative;
+    overflow:hidden;
+  }
+  header::after{
+    content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;
+    background:radial-gradient(circle,rgba(47,161,78,.35),transparent 70%);
+  }
+  .header-inner{max-width:780px;margin:0 auto;padding:0 20px;position:relative;z-index:1;}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:22px;}
+  .brand svg{flex:none;}
+  .brand-name{font-weight:600;font-size:16px;letter-spacing:.2px;}
+  h1{
+    font-family:"Fraunces",Georgia,serif;
+    font-weight:600;
+    font-size:clamp(30px,6vw,42px);
+    line-height:1.08;
+    margin:0 0 10px;
+    letter-spacing:-.5px;
+  }
+  .updated{font-size:14px;color:#cdd9f0;font-weight:400;}
+
+  /* Card */
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:38px 40px;
+    box-shadow:0 18px 40px -28px rgba(26,42,108,.45);
+    position:relative;
+    z-index:2;
+  }
+  .intro{font-size:17px;color:#33405a;margin-top:0;}
+
+  h2{
+    font-family:"Fraunces",Georgia,serif;
+    font-weight:600;
+    font-size:22px;
+    color:var(--navy);
+    margin:38px 0 12px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+  }
+  h2:first-of-type{border-top:none;padding-top:0;}
+  h3{font-size:16px;font-weight:600;color:var(--ink);margin:22px 0 6px;}
+  p{margin:0 0 14px;}
+  ul{margin:0 0 14px;padding-left:22px;}
+  li{margin-bottom:8px;}
+  a{color:var(--tg);text-decoration:none;border-bottom:1px solid rgba(29,151,212,.35);}
+  a:hover{border-bottom-color:var(--tg);}
+  strong{font-weight:600;color:var(--ink);}
+
+  .fill{
+    background:var(--fill);
+    border:1px dashed var(--fill-line);
+    border-radius:5px;
+    padding:1px 7px;
+    font-weight:600;
+    color:#7a5a00;
+    font-size:.95em;
+  }
+
+  .callout{
+    background:#f0f8ff;
+    border:1px solid #cfe7f7;
+    border-left:4px solid var(--tg);
+    border-radius:10px;
+    padding:16px 18px;
+    margin:18px 0;
+    font-size:15px;
+  }
+  .callout strong{color:var(--navy);}
+
+  .toc{
+    background:#f5f8fc;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px 22px;
+    margin:26px 0 6px;
+  }
+  .toc-title{font-size:13px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);font-weight:600;margin-bottom:10px;}
+  .toc ol{margin:0;padding-left:20px;columns:2;column-gap:30px;font-size:14.5px;}
+  .toc li{margin-bottom:6px;}
+  .toc a{border:none;color:#33405a;}
+  .toc a:hover{color:var(--tg);}
+
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:13.5px;
+    margin-top:34px;
+    line-height:1.6;
+  }
+  footer .dot{color:var(--green);}
+
+  @media (max-width:560px){
+    .card{padding:26px 22px;border-radius:14px;}
+    .toc ol{columns:1;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <svg width="34" height="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M24 4C16 4 10 10 10 18c0 9 14 26 14 26s14-17 14-26c0-8-6-14-14-14z" fill="#2fa14e"/>
+        <rect x="14" y="13" width="20" height="14" rx="5" fill="#ffffff"/>
+        <circle cx="20" cy="20" r="1.7" fill="#1a2a6c"/>
+        <circle cx="24" cy="20" r="1.7" fill="#1a2a6c"/>
+        <circle cx="28" cy="20" r="1.7" fill="#1a2a6c"/>
+      </svg>
+      <span class="brand-name">ReviewAi Connect</span>
+    </div>
+    <h1>Privacy Policy</h1>
+    <div class="updated">Last updated: June 8, 2026</div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="card">
+
+    <p class="intro">ReviewAi Connect ("the App", "we", "us") is an AI-powered assistant that helps Telegram channel owners and businesses read and reply to public channel comments and private customer messages. This Privacy Policy explains what information we collect, how we use and share it, and the choices and rights you have. The App is provided by <span class="fill">ReviewAi</span>, based in <span class="fill">Hungary</span>.</p>
+
+    <div class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#collect">Information We Collect</a></li>
+        <li><a href="#use">How We Use Information</a></li>
+        <li><a href="#ai">AI Processing</a></li>
+        <li><a href="#sharing">Third-Party Services</a></li>
+        <li><a href="#business">Business Users &amp; Customer Data</a></li>
+        <li><a href="#retention">Data Retention</a></li>
+        <li><a href="#rights">Your Rights &amp; Data Deletion</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#children">Children's Privacy</a></li>
+        <li><a href="#transfers">International Transfers</a></li>
+        <li><a href="#changes">Changes</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ol>
+    </div>
+
+    <h2 id="collect">1. Information We Collect</h2>
+
+    <h3>Account information</h3>
+    <p>When you sign in with Google, we receive your <strong>email address, name, and Google account identifier</strong>. We use this only to create and identify your account. We do <strong>not</strong> request access to your Google Business Profile, contacts, files, or any other Google data.</p>
+
+    <h3>Telegram content you choose to connect</h3>
+    <ul>
+      <li><strong>Public channel comments.</strong> When you link your channel's discussion group, our bot receives the comments posted there — including the commenter's display name or username, the message text, and the related message and chat identifiers — so they can appear in the App for you to reply to.</li>
+      <li><strong>Private business messages.</strong> If you enable Telegram Business (Secretary Mode) and connect our bot to your account, the bot processes the chats you authorize — including your customers' display name or username, message text, and chat identifiers — so it can read and, where you allow it, reply on your behalf. You control which chats the bot can access through Telegram's own settings.</li>
+    </ul>
+
+    <h3>Knowledge base you provide</h3>
+    <p>Any FAQs, prices, links, policies, or business information you enter as your "knowledge base" so the assistant can answer common questions automatically.</p>
+
+    <h3>Subscription information</h3>
+    <p>Subscription and purchase status is managed through Google Play Billing and RevenueCat. We store your current plan (Free, Pro, or Agency). We do <strong>not</strong> collect or store your payment card or billing details — these are handled by Google Play.</p>
+
+    <h3>Push notification token</h3>
+    <p>If you enable notifications, we store a push token (provided by Expo) so we can alert you about new comments and messages.</p>
+
+    <h3>Technical &amp; session data</h3>
+    <p>A secure session token to keep you logged in, and limited technical logs needed to operate and secure the service.</p>
+
+    <h2 id="use">2. How We Use Information</h2>
+    <ul>
+      <li>To provide the core service: showing your comments and messages and posting your replies to Telegram.</li>
+      <li>To generate AI reply suggestions, automatic answers from your knowledge base, and (for Pro/Agency) AI moderation of spam, scams, and abusive comments.</li>
+      <li>To send you push notifications you have enabled.</li>
+      <li>To manage your subscription and enforce plan limits.</li>
+      <li>To maintain the security, integrity, and reliability of the service.</li>
+    </ul>
+
+    <h2 id="ai">3. AI Processing</h2>
+    <p>To generate replies, answer questions from your knowledge base, and classify content for moderation, the relevant message text and knowledge base content are sent to <strong>Google's Gemini API</strong> for processing. This processing is subject to Google's terms and privacy practices. We do not use your content to train our own models.</p>
+    <div class="callout"><strong>Please note:</strong> AI-generated replies, auto-answers, and moderation decisions can be imperfect. You remain responsible for reviewing automated activity on your channels and accounts.</div>
+
+    <h2 id="sharing">4. Third-Party Services</h2>
+    <p>We do not sell your personal data. We share data only with service providers that help us operate the App, each acting under their own privacy terms:</p>
+    <ul>
+      <li><strong>Google</strong> — Sign-In, the Gemini AI API, Firebase/Firestore (data storage), Cloud Run (hosting), and Google Play Billing. (<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>)</li>
+      <li><strong>Telegram</strong> — the Bot API used to receive and send messages. (<a href="https://telegram.org/privacy" target="_blank" rel="noopener">Telegram Privacy Policy</a>)</li>
+      <li><strong>RevenueCat</strong> — subscription management. (<a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat Privacy Policy</a>)</li>
+      <li><strong>Expo</strong> — delivery of push notifications. (<a href="https://expo.dev/privacy" target="_blank" rel="noopener">Expo Privacy Policy</a>)</li>
+    </ul>
+    <p>We may also disclose information if required by law or to protect our rights, users, or the public.</p>
+
+    <h2 id="business">5. Business Users &amp; Your Customers' Data</h2>
+    <p>When you connect the App to your channel or business account, you may process messages from <strong>other people (your customers or followers)</strong>. In relation to that data, <strong>you</strong> are responsible as the controller, and the App acts as a processor on your behalf. You are responsible for having a lawful basis to process those messages and for informing the people you communicate with, as required by the laws that apply to you. You must use the App in accordance with Telegram's terms and applicable law.</p>
+
+    <h2 id="retention">6. Data Retention</h2>
+    <p>Comments and messages stored for you are generally <strong>deleted from our systems once you have replied to them</strong>, or after a limited period. Your account information and settings are kept while your account is active. When you delete your account, the associated data is removed from our active systems, except where we must retain limited records to comply with legal obligations.</p>
+
+    <h2 id="rights">7. Your Rights &amp; Data Deletion</h2>
+    <p>Depending on where you live (including under the EU/UK GDPR), you may have the right to access, correct, delete, or restrict the processing of your personal data, and to object to certain processing.</p>
+    <ul>
+      <li><strong>In the App:</strong> logging out removes your active session and stored push token.</li>
+      <li><strong>Account &amp; data deletion:</strong> to request deletion of your account and all associated data, email us at <span class="fill">luckyflopbtt@gmail.com</span> from your account email. We will process the request within a reasonable time.</li>
+    </ul>
+
+    <h2 id="security">8. Security</h2>
+    <p>Data is transmitted over encrypted connections (HTTPS) and stored on reputable infrastructure (Google Cloud / Firebase) protected by access controls. No method of transmission or storage is completely secure, but we take reasonable measures to protect your information.</p>
+
+    <h2 id="children">9. Children's Privacy</h2>
+    <p>The App is intended for business and adult use and is not directed to children under 16. We do not knowingly collect personal data from children. If you believe a child has provided us with personal data, please contact us so we can remove it.</p>
+
+    <h2 id="transfers">10. International Data Transfers</h2>
+    <p>Your information may be stored and processed on servers located in countries other than your own (for example, on Google Cloud infrastructure). By using the App, you understand that your data may be transferred internationally as part of providing the service.</p>
+
+    <h2 id="changes">11. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. When we do, we will revise the "Last updated" date above. Significant changes may be communicated within the App.</p>
+
+    <h2 id="contact">12. Contact Us</h2>
+    <p>If you have any questions about this Privacy Policy or your data, contact us at:</p>
+    <p><strong>Email:</strong> <span class="fill">luckyflopbtt@gmail.com</span><br>
+    <strong>App:</strong> ReviewAi Connect</p>
+
+  </div>
+
+  <footer>
+    <span class="dot">●</span> &nbsp;ReviewAi Connect &nbsp;·&nbsp; &copy; 2026 &nbsp;·&nbsp; All rights reserved
+  </footer>
+</div>
+
+</body>
+</html>
