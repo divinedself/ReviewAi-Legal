@@ -1,389 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ReviewAi Connect — Smart Google Review Management</title>
-  <meta name="description" content="ReviewAi Connect helps business owners read and reply to their Google Business Profile reviews with AI-assisted, multilingual responses." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --navy: #14224f;
-      --navy-soft: #1a2a6c;
-      --blue: #2f6fdc;
-      --blue-bright: #3498db;
-      --paper: #f7f4ee;
-      --paper-card: #fffdf9;
-      --ink: #1c2433;
-      --ink-soft: #4a5468;
-      --line: #e6e0d4;
-      --accent: #2ecc71;
-      --radius: 18px;
-      --maxw: 920px;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
-    body {
-      font-family: "Newsreader", Georgia, serif;
-      background: var(--paper);
-      background-image:
-        radial-gradient(900px 500px at 100% -10%, rgba(52,152,219,0.10), transparent 60%),
-        radial-gradient(700px 500px at -10% 110%, rgba(20,34,79,0.08), transparent 55%);
-      color: var(--ink);
-      font-size: 18px;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-    h1, h2, h3, .nav-brand, .pill, .btn, .step-num, .feature h3 {
-      font-family: "Bricolage Grotesque", system-ui, sans-serif;
-      letter-spacing: -0.01em;
-    }
-    a { color: var(--blue); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ReviewAi Connect — AI assistant for Telegram comments &amp; messages</title>
+<meta name="description" content="ReviewAi Connect helps Telegram channel owners and businesses read and reply to comments and private customer messages with AI-assisted, multilingual replies, auto-answers, and spam moderation." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#19233a;--navy:#1a2a6c;--tg:#1d97d4;--green:#2fa14e;
+    --bg:#f7f9fc;--card:#ffffff;--muted:#5c6678;--line:#e8edf4;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.7;font-size:16px;-webkit-font-smoothing:antialiased;}
+  a{color:var(--tg);text-decoration:none;}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 22px;}
 
-    /* NAV */
-    nav {
-      position: sticky; top: 0; z-index: 50;
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-      padding: 0.85rem clamp(1rem, 4vw, 2rem);
-      background: rgba(247, 244, 238, 0.82);
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
-    }
-    .nav-brand { font-weight: 800; font-size: 1.15rem; color: var(--navy); display: flex; align-items: center; gap: 0.5rem; }
-    .nav-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(46,204,113,0.18); }
-    .nav-links { display: flex; gap: 0.3rem; flex-wrap: wrap; }
-    .nav-links a {
-      font-family: "Bricolage Grotesque", sans-serif; font-weight: 500; font-size: 0.9rem;
-      color: var(--ink-soft); padding: 0.35rem 0.65rem; border-radius: 999px; transition: background 0.2s, color 0.2s;
-    }
-    .nav-links a:hover { background: rgba(20,34,79,0.07); color: var(--navy); text-decoration: none; }
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--navy);font-size:17px;}
+  .nav-links{display:flex;gap:20px;flex-wrap:wrap;}
+  .nav-links a{color:var(--ink);font-size:14.5px;font-weight:500;}
+  .nav-links a:hover{color:var(--tg);}
 
-    /* HERO */
-    header.hero {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 55%, #243a8c 100%);
-      color: #fff; padding: clamp(3.5rem, 10vw, 7rem) clamp(1rem, 5vw, 2rem) clamp(3rem, 8vw, 5rem);
-      position: relative; overflow: hidden;
-    }
-    header.hero::after {
-      content: ""; position: absolute; inset: 0;
-      background-image: radial-gradient(circle at 85% 20%, rgba(52,152,219,0.35), transparent 45%);
-      pointer-events: none;
-    }
-    .hero-inner { max-width: var(--maxw); margin: 0 auto; position: relative; }
-    .pill {
-      display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: #bcd4ff; background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.18); padding: 0.35rem 0.85rem; border-radius: 999px; margin-bottom: 1.25rem;
-    }
-    .hero h1 { font-size: clamp(2.4rem, 8vw, 4rem); font-weight: 800; line-height: 1.04; margin-bottom: 1.1rem; }
-    .hero p.tagline { font-size: clamp(1.1rem, 2.6vw, 1.4rem); color: #d7e0f5; max-width: 62ch; }
-    .badges { margin-top: 1.8rem; display: flex; gap: 0.7rem; flex-wrap: wrap; }
-    .badge {
-      font-family: "Bricolage Grotesque", sans-serif; font-size: 0.85rem; font-weight: 600;
-      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-      color: #eaf1ff; padding: 0.5rem 1rem; border-radius: 999px;
-    }
+  /* hero */
+  .hero{background:linear-gradient(135deg,#162257 0%,#1a2a6c 42%,#1d97d4 125%);color:#fff;position:relative;overflow:hidden;}
+  .hero::after{content:"";position:absolute;right:-80px;top:-60px;width:320px;height:320px;background:radial-gradient(circle,rgba(47,161,78,.30),transparent 70%);}
+  .hero-inner{position:relative;z-index:1;text-align:center;padding:64px 22px 76px;max-width:820px;margin:0 auto;}
+  .app-icon{filter:drop-shadow(0 16px 30px rgba(0,0,0,.35));border-radius:28%;margin-bottom:26px;}
+  .badge{display:inline-block;border:1px solid rgba(255,255,255,.4);color:#dce8ff;border-radius:999px;padding:7px 16px;font-size:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:22px;}
+  h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(40px,8vw,68px);line-height:1.02;letter-spacing:-1px;margin:0 0 18px;}
+  .sub{font-size:clamp(16px,2.4vw,19px);color:#e7eefb;max-width:640px;margin:0 auto 28px;}
+  .pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:500;color:#fff;display:inline-flex;align-items:center;gap:7px;}
 
-    /* LAYOUT */
-    main { max-width: var(--maxw); margin: 0 auto; padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 5vw, 2rem) 1rem; }
-    section.card {
-      background: var(--paper-card); border: 1px solid var(--line); border-radius: var(--radius);
-      padding: clamp(1.5rem, 5vw, 2.75rem); margin-bottom: 1.75rem;
-      box-shadow: 0 18px 40px -28px rgba(20,34,79,0.35);
-    }
-    h2 {
-      font-size: clamp(1.5rem, 4vw, 2.05rem); font-weight: 700; color: var(--navy);
-      margin-bottom: 1.1rem; padding-bottom: 0.6rem; border-bottom: 2px solid var(--line);
-      display: flex; align-items: baseline; gap: 0.6rem;
-    }
-    h2 .num { font-size: 0.95rem; color: var(--blue-bright); font-weight: 800; }
-    h3 { font-size: 1.18rem; font-weight: 700; color: var(--navy-soft); margin: 1.6rem 0 0.6rem; }
-    p { margin-bottom: 1rem; color: var(--ink-soft); }
-    p.lead { color: var(--ink); font-size: 1.1rem; }
-    ul { margin: 0 0 1rem 1.2rem; }
-    li { margin-bottom: 0.55rem; color: var(--ink-soft); }
-    li strong { color: var(--ink); font-weight: 600; }
+  /* sections */
+  section{padding:62px 0;}
+  .section-num{font-family:"Fraunces",Georgia,serif;color:var(--tg);font-weight:600;font-size:15px;letter-spacing:1px;}
+  h2{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(26px,4.5vw,36px);color:var(--navy);margin:6px 0 18px;letter-spacing:-.5px;}
+  .lead{font-size:17px;color:#33405a;max-width:720px;}
 
-    /* FEATURES GRID */
-    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 0.5rem; }
-    .feature {
-      background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 1.25rem 1.35rem;
-    }
-    .feature .ic {
-      width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, var(--navy-soft), var(--blue)); color: #fff; font-size: 1.1rem; margin-bottom: 0.7rem; font-weight: 700;
-    }
-    .feature h3 { margin: 0 0 0.3rem; font-size: 1.05rem; color: var(--navy); }
-    .feature p { margin: 0; font-size: 0.96rem; }
+  /* features */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px;}
+  .feat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:0 14px 34px -28px rgba(26,42,108,.5);}
+  .feat .ic{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px;background:#eef6ff;}
+  .feat h3{font-size:17px;font-weight:600;color:var(--navy);margin:0 0 7px;}
+  .feat p{font-size:14.5px;color:var(--muted);margin:0;}
+  .tag{display:inline-block;font-size:11px;font-weight:600;color:#e67e22;border:1px solid #f2c79a;border-radius:6px;padding:1px 7px;margin-top:10px;}
 
-    /* STEPS */
-    .steps { display: grid; gap: 1rem; margin-top: 0.5rem; }
-    .step { display: flex; gap: 1rem; align-items: flex-start; }
-    .step-num {
-      flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--navy-soft); color: #fff;
-      display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.05rem;
-    }
-    .step div p { margin: 0; }
-    .step div strong { color: var(--navy); font-family: "Bricolage Grotesque", sans-serif; }
+  /* steps */
+  .steps{counter-reset:s;list-style:none;padding:0;margin:30px 0 0;display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .steps li{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px 20px 64px;}
+  .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:18px;top:20px;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#1a2a6c,#1d97d4);color:#fff;font-weight:600;display:flex;align-items:center;justify-content:center;}
+  .steps strong{display:block;color:var(--navy);margin-bottom:3px;}
+  .steps span{font-size:14.5px;color:var(--muted);}
 
-    /* API USAGE highlight */
-    .api-usage { background: linear-gradient(135deg, #eef4ff 0%, #f7f4ee 100%); border-color: #cfe0ff; }
-    .note {
-      background: rgba(52,152,219,0.08); border-left: 4px solid var(--blue-bright); border-radius: 8px;
-      padding: 1rem 1.2rem; margin: 1.25rem 0; font-size: 0.98rem; color: var(--navy-soft);
-    }
+  /* legal + footer */
+  .legal{background:#0f1830;color:#cfd8ea;}
+  .legal .wrap{padding-top:48px;padding-bottom:40px;}
+  .legal h2{color:#fff;}
+  .legal-links{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0 8px;}
+  .legal-links a{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:11px 16px;color:#fff;font-weight:500;font-size:14.5px;}
+  .legal-links a:hover{background:rgba(255,255,255,.16);}
+  .foot{border-top:1px solid rgba(255,255,255,.12);margin-top:26px;padding-top:18px;font-size:13.5px;color:#9fb0cc;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  .foot .dot{color:var(--green);}
 
-    /* CONTACT */
-    .contact-box { text-align: center; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); color: #fff; border: none; }
-    .contact-box h2 { color: #fff; border-color: rgba(255,255,255,0.2); justify-content: center; }
-    .contact-box p { color: #d7e0f5; }
-    .btn {
-      display: inline-block; margin-top: 0.5rem; background: var(--accent); color: #06351b; font-weight: 700;
-      padding: 0.8rem 1.8rem; border-radius: 999px; font-size: 1rem; transition: transform 0.15s, box-shadow 0.2s;
-      box-shadow: 0 10px 24px -10px rgba(46,204,113,0.7);
-    }
-    .btn:hover { transform: translateY(-2px); text-decoration: none; }
-
-    footer { text-align: center; padding: 2.5rem 1rem 3rem; color: var(--ink-soft); font-size: 0.9rem; }
-    footer .nav-brand { justify-content: center; margin-bottom: 0.5rem; font-size: 1rem; }
-    footer .links { margin-bottom: 0.6rem; }
-    footer .links a { margin: 0 0.5rem; color: var(--blue); }
-
-    @media (max-width: 560px) { .nav-links { display: none; } body { font-size: 17px; } }
-  </style>
+  @media (max-width:760px){
+    .grid{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr;}
+    .nav-links{gap:14px;}
+  }
+</style>
 </head>
 <body>
 
-  <nav>
-    <div class="nav-brand"><span class="nav-dot"></span> ReviewAi Connect</div>
-    <div class="nav-links">
+<!-- inline icon reused in header + hero -->
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <svg width="30" height="30" viewBox="0 0 1024 1024" style="border-radius:24%">
+        <defs>
+          <linearGradient id="bgS" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2cb2ee"/><stop offset="1" stop-color="#147ac4"/></linearGradient>
+          <linearGradient id="spkS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#18a0e6"/><stop offset="1" stop-color="#2ba24d"/></linearGradient>
+        </defs>
+        <rect width="1024" height="1024" rx="228" fill="url(#bgS)"/>
+        <path d="M356 604 L326 706 L474 604 Z" fill="#fff"/>
+        <rect x="244" y="250" width="536" height="362" rx="92" fill="#fff"/>
+        <path d="M488 287 Q488 415 616 415 Q488 415 488 543 Q488 415 360 415 Q488 415 488 287 Z" fill="url(#spkS)"/>
+        <path d="M644 266 Q644 312 690 312 Q644 312 644 358 Q644 312 598 312 Q644 312 644 266 Z" fill="#2ba24d"/>
+      </svg>
+      ReviewAi Connect
+    </div>
+    <nav class="nav-links">
       <a href="#about">About</a>
       <a href="#features">Features</a>
       <a href="#how">How it works</a>
-      <a href="#api">Google API Use</a>
-      <a href="#privacy">Privacy</a>
-      <a href="#terms">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
       <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <svg class="app-icon" width="128" height="128" viewBox="0 0 1024 1024" role="img" aria-label="ReviewAi Connect app icon">
+      <defs>
+        <linearGradient id="bgH" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2cb2ee"/><stop offset="1" stop-color="#147ac4"/></linearGradient>
+        <linearGradient id="spkH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#18a0e6"/><stop offset="1" stop-color="#2ba24d"/></linearGradient>
+      </defs>
+      <rect width="1024" height="1024" rx="228" fill="url(#bgH)"/>
+      <path d="M356 604 L326 706 L474 604 Z" fill="#fff"/>
+      <rect x="244" y="250" width="536" height="362" rx="92" fill="#fff"/>
+      <path d="M488 287 Q488 415 616 415 Q488 415 488 543 Q488 415 360 415 Q488 415 488 287 Z" fill="url(#spkH)"/>
+      <path d="M644 266 Q644 312 690 312 Q644 312 644 358 Q644 312 598 312 Q644 312 644 266 Z" fill="#2ba24d"/>
+    </svg>
+    <div class="badge">AI-Powered Telegram Assistant</div>
+    <h1>ReviewAi Connect</h1>
+    <p class="sub">Read and reply to your Telegram channel comments and private customer messages — with AI-assisted, multilingual replies, automatic answers, and spam moderation, all from one app.</p>
+    <div class="pills">
+      <span class="pill">💬 For Telegram channels &amp; businesses</span>
+      <span class="pill">🤖 AI-assisted replies</span>
+      <span class="pill">🌐 Any language</span>
     </div>
-  </nav>
+  </div>
+</div>
 
-  <header class="hero">
-    <div class="hero-inner">
-      <span class="pill">Smart Google Review Management</span>
-      <h1>ReviewAi Connect</h1>
-      <p class="tagline">A mobile app that helps business owners read, understand, and reply to their Google Business Profile reviews — with AI-assisted, multilingual responses, all from one place.</p>
-      <div class="badges">
-        <span class="badge">📍 For Google Business Profiles</span>
-        <span class="badge">🤖 AI-assisted replies</span>
-        <span class="badge">🌍 Any language</span>
-      </div>
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-num">01</div>
+    <h2>About ReviewAi Connect</h2>
+    <p class="lead">ReviewAi Connect is an AI-powered assistant for Telegram. It brings the comments on your channel and the private messages from your customers into one simple mobile app, helps you understand them, and replies in the right tone and language — so you never miss a conversation and your community always feels heard.</p>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-num">02</div>
+    <h2>Features</h2>
+    <div class="grid">
+      <div class="feat"><div class="ic">💡</div><h3>Smart AI replies</h3><p>Get instant, on-brand reply suggestions for any comment or message — written in the same language the person used.</p></div>
+      <div class="feat"><div class="ic">⚡</div><h3>Instant auto-answers</h3><p>Add your FAQs, prices, and links once. The AI automatically answers common questions, day and night, in comments and private chats.</p></div>
+      <div class="feat"><div class="ic">🛡️</div><h3>Spam &amp; scam moderation</h3><p>AI detects and removes spam, scam links, and abusive comments from your channel's discussion group.<br><span class="tag">Pro / Agency</span></p></div>
+      <div class="feat"><div class="ic">✉️</div><h3>Private customer chats</h3><p>Connect Telegram Business and let the assistant read and reply to your private 1:1 customer messages on your behalf.</p></div>
+      <div class="feat"><div class="ic">🌐</div><h3>Any language</h3><p>Detects and replies in the customer's own language — perfect for international, multilingual audiences.</p></div>
+      <div class="feat"><div class="ic">💎</div><h3>Flexible plans</h3><p>Start free, then upgrade to Pro or Agency for higher daily limits, moderation, and more capacity.</p></div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <main>
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap">
+    <div class="section-num">03</div>
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><strong>Sign in</strong><span>Sign in securely and you're ready to go — no complex setup.</span></li>
+      <li><strong>Connect Telegram</strong><span>Add the bot to your channel's discussion group (or connect Telegram Business) and link it with a one-time code.</span></li>
+      <li><strong>Let AI help</strong><span>New comments and messages appear in the app with smart reply suggestions and optional automatic answers.</span></li>
+      <li><strong>Reply &amp; relax</strong><span>Send the perfect reply in a tap — or let auto-reply and moderation run on their own.</span></li>
+    </ol>
+  </div>
+</section>
 
-    <!-- ABOUT -->
-    <section class="card" id="about">
-      <h2><span class="num">01</span> About ReviewAi Connect</h2>
-      <p class="lead">ReviewAi Connect is a productivity tool built for business owners who manage their reputation on Google.</p>
-      <p>Keeping up with customer reviews takes time — especially replying thoughtfully, quickly, and in the customer's own language. ReviewAi Connect brings all of a business owner's Google reviews into a single, simple mobile app, suggests professional replies using AI, and lets the owner publish a response to Google Maps with one tap.</p>
-      <p>Our mission is to help local businesses respond faster, stay professional, and never miss a review.</p>
-    </section>
-
-    <!-- FEATURES -->
-    <section class="card" id="features">
-      <h2><span class="num">02</span> What It Does</h2>
-      <div class="features">
-        <div class="feature">
-          <div class="ic">★</div>
-          <h3>All reviews in one place</h3>
-          <p>See every review from your Google Business Profile in a clean, unified inbox.</p>
-        </div>
-        <div class="feature">
-          <div class="ic">✨</div>
-          <h3>AI reply suggestions</h3>
-          <p>Get three ready-to-send, professional reply options for each review.</p>
-        </div>
-        <div class="feature">
-          <div class="ic">🌍</div>
-          <h3>Automatic translation</h3>
-          <p>Understand and reply to reviews in any language your customers use.</p>
-        </div>
-        <div class="feature">
-          <div class="ic">↗</div>
-          <h3>One-tap publish</h3>
-          <p>Post the reply you choose directly to Google Maps, instantly.</p>
-        </div>
-        <div class="feature">
-          <div class="ic">🔔</div>
-          <h3>New-review alerts</h3>
-          <p>Receive a notification the moment a new review arrives, so you can respond fast.</p>
-        </div>
-        <div class="feature">
-          <div class="ic">🔒</div>
-          <h3>Secure &amp; private</h3>
-          <p>Connect securely with Google sign-in. You stay in full control of every reply.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section class="card" id="how">
-      <h2><span class="num">03</span> How It Works</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div><p><strong>Connect your Google account.</strong> Sign in securely with Google. You grant access to manage your own Business Profile through Google's official consent screen.</p></div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div><p><strong>Fetch your reviews.</strong> The app loads the reviews from your verified Google Business Profile and displays them in the app.</p></div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div><p><strong>Get smart suggestions.</strong> For any review, the app generates three professional reply options (and a translation), which you can read and edit.</p></div>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div><p><strong>Publish your reply.</strong> Choose the reply you like and publish it to Google Maps with one tap. You always decide what gets posted.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- GOOGLE API USAGE / COMPLIANCE -->
-    <section class="card api-usage" id="api">
-      <h2><span class="num">04</span> How We Use the Google Business Profile APIs</h2>
-      <p class="lead">ReviewAi Connect uses Google's official Business Profile APIs solely to provide its core feature: helping a business owner manage the reviews on their own verified Google Business Profile.</p>
-
-      <h3>What we access</h3>
-      <p>With the user's explicit consent (granted through Google's standard OAuth flow using the <strong>business.manage</strong> scope), the app uses the Business Profile APIs to:</p>
-      <ul>
-        <li><strong>Read</strong> the business accounts and locations the signed-in user manages.</li>
-        <li><strong>Read</strong> the reviews left on the user's own Business Profile, to display them inside the app.</li>
-        <li><strong>Reply</strong> to a review by posting the response text that the business owner has reviewed and approved.</li>
-      </ul>
-
-      <h3>Our business reason</h3>
-      <p>We are a software provider building a legitimate tool for business owners to manage their own Business Profile reviews more efficiently. The app does not aggregate, resell, scrape, or expose third-party business data. Each user only ever accesses the Business Profiles they themselves own and manage.</p>
-
-      <h3>Policy compliance</h3>
-      <p>We use the Business Profile APIs in accordance with Google's Business Profile API policies and Terms of Service. We do not use the APIs for any prohibited purpose, and we never publish a reply without the owner's explicit action.</p>
-
-      <div class="note">All review replies are written or approved by the business owner. AI suggestions are optional drafts; the owner always chooses what, if anything, is posted to Google.</div>
-    </section>
-
-    <!-- PRIVACY -->
-    <section class="card" id="privacy">
-      <h2><span class="num">05</span> Privacy Policy</h2>
-      <p style="font-style:italic;color:var(--ink-soft);margin-bottom:1.2rem;">Last updated: June 5, 2026</p>
-      <p class="lead">We are committed to protecting your privacy. This policy explains what information ReviewAi Connect collects, how we use it, and the choices you have.</p>
-
-      <h3>Information We Collect</h3>
-      <ul>
-        <li><strong>Google account details</strong> — your email address and name, obtained through the Google sign-in (OAuth) process.</li>
-        <li><strong>Google authorization tokens</strong> — secure tokens that let the app access your Google Business Profile on your behalf, so it can read reviews and post the replies you approve.</li>
-        <li><strong>Business information</strong> — your business location name and phone number, as listed on your Google Business Profile.</li>
-        <li><strong>Review content</strong> — the text and ratings of reviews left on your business, which the app reads to display them and help you reply.</li>
-        <li><strong>Notification token</strong> — a device identifier used only to send you push notifications about new reviews.</li>
-        <li><strong>Subscription status</strong> — whether you have an active Pro or Agency subscription, managed through Google Play.</li>
-      </ul>
-
-      <h3>How We Use Your Information</h3>
-      <ul>
-        <li>To display your business reviews inside the app.</li>
-        <li>To generate suggested replies and publish a reply you choose to your Google Business Profile.</li>
-        <li>To send you notifications when new reviews are received.</li>
-        <li>To manage your subscription and provide access to paid features.</li>
-      </ul>
-
-      <h3>AI Processing of Reviews</h3>
-      <p>To generate suggested reply options and translations, the text of a review is sent to a third-party AI service (Google's Gemini API) at the moment you request a reply. This text is processed to create the suggestions shown to you and is not used by us to build a public profile of you or your customers.</p>
-
-      <h3>Third-Party Services</h3>
-      <p>We share information only with the trusted service providers needed to operate the app:</p>
-      <ul>
-        <li><strong>Google</strong> — for sign-in, the Google Business Profile API, and AI reply generation.</li>
-        <li><strong>RevenueCat &amp; Google Play</strong> — to process and verify subscriptions.</li>
-        <li><strong>Expo</strong> — to deliver push notifications.</li>
-        <li><strong>Google Cloud &amp; Firebase</strong> — to host our service and securely store the data above.</li>
-      </ul>
-      <p><strong>We do not sell your personal information, and we do not share it with advertisers.</strong></p>
-
-      <h3>Data Storage &amp; Security</h3>
-      <p>Your information is stored on secure cloud infrastructure (Google Cloud / Firebase). Access tokens and account details are used only to provide the service. We take reasonable measures to protect your data from unauthorized access.</p>
-
-      <h3>Data Retention &amp; Deletion</h3>
-      <p>We keep your information only as long as your account is active. You can:</p>
-      <ul>
-        <li><strong>Log out</strong> at any time, which removes your notification token and ends the app's session.</li>
-        <li><strong>Revoke access</strong> from your Google Account security settings, which immediately stops the app from accessing your Google Business Profile.</li>
-        <li><strong>Request deletion</strong> of all data we hold about you by emailing us at the address below. We will delete your data promptly after verifying your request.</li>
-      </ul>
-
-      <h3>Children's Privacy</h3>
-      <p>ReviewAi Connect is intended for business owners and is not directed at children under 13 (or the equivalent minimum age in your country). We do not knowingly collect data from children.</p>
-
-      <h3>Changes to This Policy</h3>
-      <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated date.</p>
-    </section>
-
-    <!-- TERMS -->
-    <section class="card" id="terms">
-      <h2><span class="num">06</span> Terms of Service</h2>
-      <p class="lead">By downloading or using ReviewAi Connect, you agree to these Terms of Service. If you do not agree, please do not use the app.</p>
-
-      <h3>The Service</h3>
-      <p>ReviewAi Connect lets you connect a Google Business Profile to read reviews, generate AI-assisted reply suggestions, and publish replies. The service depends on Google's APIs and may change or become temporarily unavailable.</p>
-
-      <h3>Your Account &amp; Connection</h3>
-      <p>You are responsible for the Google account you connect and for the activity that occurs through your use of the app. You must have the right to manage the business profile you connect.</p>
-
-      <h3>Subscriptions &amp; Billing</h3>
-      <ul>
-        <li>The app offers optional auto-renewing subscriptions (<strong>Pro</strong> and <strong>Agency</strong>) that unlock higher usage limits.</li>
-        <li>Payment is charged to your Google Play account at confirmation of purchase.</li>
-        <li>Subscriptions automatically renew for the same period unless cancelled at least 24 hours before the end of the current period.</li>
-        <li>You can manage or cancel your subscription at any time in your Google Play account settings.</li>
-        <li>Prices are shown in the app before purchase and may vary by region.</li>
-      </ul>
-
-      <h3>AI-Generated Content</h3>
-      <p>Reply suggestions are generated automatically by AI and may contain errors. <strong>You are responsible for reviewing any suggested reply before publishing it.</strong> You choose which reply, if any, is posted to your Google Business Profile.</p>
-
-      <h3>Acceptable Use</h3>
-      <p>You agree not to misuse the app, attempt to disrupt the service, or use it for unlawful purposes or to post content that violates Google's policies.</p>
-
-      <h3>Disclaimer &amp; Limitation of Liability</h3>
-      <p>The app is provided "as is" without warranties of any kind. To the maximum extent permitted by law, we are not liable for any indirect or consequential damages arising from your use of the app, including any reply published to your business profile.</p>
-
-      <h3>Governing Law</h3>
-      <p>These Terms are governed by the laws of <strong>Hungary</strong>, without regard to conflict-of-law rules.</p>
-
-      <h3>Changes to These Terms</h3>
-      <p>We may update these Terms from time to time. Continued use of the app after changes are posted means you accept the updated Terms.</p>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="card contact-box" id="contact">
-      <h2>Contact Us</h2>
-      <p>Questions about the app, this Privacy Policy, or these Terms? We're happy to help.</p>
-      <a class="btn" href="mailto:luckyflopbtt@gmail.com">luckyflopbtt@gmail.com</a>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="nav-brand"><span class="nav-dot"></span> ReviewAi Connect</div>
-    <div class="links">
-      <a href="#privacy">Privacy</a> ·
-      <a href="#terms">Terms</a> ·
-      <a href="#contact">Contact</a>
+<!-- LEGAL + CONTACT -->
+<div class="legal" id="contact">
+  <div class="wrap">
+    <h2>Legal &amp; Contact</h2>
+    <p>Read our policies or get in touch:</p>
+    <div class="legal-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="delete-account.html">Account &amp; Data Deletion</a>
+      <a href="mailto:luckyflopbtt@gmail.com">Email Support</a>
     </div>
-    <div>© 2026 ReviewAi Connect. All rights reserved.</div>
-  </footer>
+    <div class="foot">
+      <span><span class="dot">●</span> ReviewAi Connect</span>
+      <span>© 2026 ReviewAi Connect. All rights reserved.</span>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
